@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: docker-registry-cleanup
+  namespace: kube-system
+spec:
+    selector:
+      matchLabels:
+        app: docker-registry-cleanup
+    template:
+      metadata:
+        labels:
+          app: docker-registry-cleanup
+      spec:
+        volumes:
+        - name: dockersocket
+          hostPath:
+            path: /var/run/docker.sock
+        containers:
+        - name: docker-registry-cleanup
+          image: ghcr.io/kubeopsskills/docker-registry-cleanup:0.0.1
+          imagePullPolicy: Always
+          env:
+          - name: CLEANUP_CRONSCHEDULE
+            value: "59 0 * * * *"
+          volumeMounts:
+          - name: dockersocket
+            mountPath: /var/run/docker.sock
