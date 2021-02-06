@@ -1,4 +1,4 @@
-FROM public.ecr.aws/s3t5k9h7/alpine:3.13.0
+FROM alpine:3.13.1
 
 LABEL maintainer="Onfido, KubeOps Skills <support@kubeops.guru>"
 
