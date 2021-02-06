@@ -17,8 +17,6 @@ spec:
         - name: dockersocket
           hostPath:
             path: /var/run/docker.sock
-        securityContext:
-          runAsUser: 1000
         containers:
         - name: docker-registry-cleanup
           image: ghcr.io/kubeopsskills/docker-registry-cleanup:0.0.1
